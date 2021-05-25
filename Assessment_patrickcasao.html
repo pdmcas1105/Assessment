@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+.modal-content {
+  background-color: rgb(0, 120, 120);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+.close {
+  color:rgb(247, 219, 0);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.card{
+    color: rgb(247, 219, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 40px;
+    width: max-content;
+    text-align: center;
+    display: inline-block;
+    background-color:rgb(0, 120, 120);
+    margin: 50px;
+}
+.card img{  
+    height: 300px;   
+    width: 300px;
+    padding: 5px;
+}
+button{
+    border: 5px solid;
+    background-color:rgb(247, 219, 0) ;
+    color: rgb(0,120,120);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 2px;
+    padding: 5px 5px ;
+}
+button:hover{
+    box-shadow: 0 0 2px 2px rgb(247, 219, 0);
+}
+h1 {
+    color: rgb(247, 219, 0) ;
+    font-size: 81px;
+    font-family:monospace;
+    background-color: rgb(0, 120, 120);
+}
+body{
+    background-image: url(https://wallup.net/wp-content/uploads/2019/09/34727-5-centimeters-per-second.jpg);
+   
+    background-size: cover;
+}
+.cart{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(247, 219, 0);
+    font-size: 20px;
+}
+
+.cartImg > img{
+    width: 200px;
+
+}
+</style>
+</head>
+<body>
+    <title>Shop</title>
+    <h1>SHOCKS</h1>
+    <div class="cart" id="cart">
+        <button id="myBtn">CART</button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="title"">CART</div><hr>
+                <div id="title"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card" id="socks1">
+                <img src="pexels-magda-ehlers-971092.jpg">
+                <div class="title">REDSTRIPES</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks1)">Add to Cart</button>
+            </div>
+            <div class="card" id="socks2">
+                <img src="pexels-michael-morse-1462231.jpg">
+                <div class="title">MAN</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks2)">Add to Cart</button>
+            </div>
+            <div class="card" id="socks3">
+                <img src="pexels-daria-sannikova-1921252.jpg">
+                <div class="title">DONUT</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks3)">Add to Cart</button>
+            </div>
+            <div class="card" id="socks4">
+                <img src="pexels-cottonbro-4100664.jpg">
+                <div class="title">BLUEFLAME</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks4)">Add to Cart</button>
+            </div>
+            <div class="card" id="socks5">
+                <img src="pexels-fotografierende-3563612.jpg">
+                <div class="title">ZIGZAG</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks5)">Add to Cart</button>
+            </div>
+            <div class="card" id="socks6">
+                <img src="pexels-lukas-horak-69315.jpg">
+                <div class="title">RINGS</div>
+                <div class="amount">$12.99</div>
+                <button onclick="addCart(socks6)">Add to Cart</button>
+            </div>
+        </div>
+
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+var addItemId = 0;
+function del (item){
+    document.getElementById(item).remove();
+}
+function addCart (item) {
+    addItemId += 1;
+    var selectedItem = document.createElement('div');
+    selectedItem.classList.add('cartImg'); 
+    selectedItem.setAttribute('id',addItemId);
+    var img = document.createElement('img');
+    img.setAttribute('src',item.children[0].currentSrc);
+    var title = document.createElement('div');
+    title.innerText = item.children[1].innerText;
+    var amount = document.createElement('div');
+    amount.innerText = item.children[2].innerText;
+    var cartItems = document.getElementById('title');
+    var delBtn = document.createElement('button');
+    delBtn.innerText = 'Delete';
+    delBtn.setAttribute('onclick','del('+addItemId+')');
+    selectedItem.append(img);
+    selectedItem.append(title);
+    selectedItem.append(amount);
+    selectedItem.append(delBtn);
+    cartItems.append(selectedItem); 
+}
+</script>
+</body>
+</html>
